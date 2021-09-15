@@ -27,22 +27,18 @@
 
 init()
 {
-		
 	if(getDvar("mapname") == "zm_prison") 
-		{
-			SetDvar( "scr_zm_enable_bots", "0" );
-			level thread onPlayerConnect();	
-		}
+	{
+		SetDvar( "scr_zm_enable_bots", "0" );
+		level thread onPlayerConnect();	
+	}
  
 }
 
 onPlayerConnect()
 {
-    
-		level waittill("connected", player);
-        player thread onPlayerSpawned();
-		
-    
+	level waittill("connected", player);
+    player thread onPlayerSpawned();
 } 
 
 
@@ -50,25 +46,17 @@ onPlayerSpawned()
 {
     self.stopThreading = false;
     self endon("disconnect");
-	self endon( "stage_final" );
 	self iPrintln("Motd SOLO EE script by HD Erick Games#3960");
 	level waittill_multiple( "nixie_final_" + 386, "nixie_final_" + 481, "nixie_final_" + 101, "nixie_final_" + 872 );
 	wait 10;
-	
 	for(;;)
 	{	
+		self endon( "stage_final" );
 		players = getplayers();
-		
-		if(players.size == 1){
-			
-				SetDvar( "scr_zm_enable_bots", "1" );
-				addtestclient();
-				
-				SetDvar( "scr_zm_enable_bots", "0" );
-				
-				
-				
-			
+		if(players.size == 1){	
+			SetDvar( "scr_zm_enable_bots", "1" );
+			addtestclient();	
+			SetDvar( "scr_zm_enable_bots", "0" );
 			wait 5;
 		}
 		self thread infiniteafter();
