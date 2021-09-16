@@ -24,6 +24,7 @@
 #include maps/mp/zombies/_zm_perks;
 #include maps/mp/gametypes_zm/_clientids;
 #include maps/mp/zm_prison_sq_final;  
+#include maps/mp/zombies/_zm_afterlife;
 
 init()
 {
@@ -32,7 +33,6 @@ init()
 		SetDvar( "scr_zm_enable_bots", "0" );
 		level thread onPlayerConnect();	
 	}
- 
 }
 
 onPlayerConnect()
@@ -64,16 +64,14 @@ onPlayerSpawned()
 	}
 }
 
-
-
-
 infiniteafter()
 {
-	self endon( "stage_final" );
 	foreach( p in level.players )
 	{
 		p.infinite_mana = 1;
-		
+		if ( level.final_flight_activated ){
+			p afterlife_remove();
+		}
 	}
 
 }
